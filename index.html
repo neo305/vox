@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" manifest="cache.manifest">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoxDon_host_ps4</title>
+  <link rel="stylesheet" href="includes/style.css">
+</head>
+<body>
+
+  <div class="bg-stage" aria-hidden="true">
+    <img class="bg-console" src="includes/image(5).jpg" alt="">
+    <div class="bg-shade"></div>
+  </div>
+
+  <div class="ui-layer">
+    <header class="top-bar">
+      <div class="brand">
+        <span class="brand-mark">VD</span>
+        <div class="brand-text">
+          <h1>VoxDon_host_ps4</h1>
+          <p class="tagline">PS4 · Jailbreak Host</p>
+        </div>
+      </div>
+      <h3 id="UA">Running on: —</h3>
+    </header>
+
+    <main class="panel">
+      <div class="btn-container">
+        <form id="kernel-options">
+          <div class="kernel-row">
+            <input type="radio" name="kernel" id="netctrl-exploit" value="netctrl">
+            <label for="netctrl-exploit">NetCtrl</label>
+            <input type="radio" name="kernel" id="lapse-exploit" value="lapse" checked>
+            <label for="lapse-exploit">Lapse</label>
+          </div>
+        </form>
+
+        <button id="jeilbrek" type="button">JAILBREAK</button>
+
+        <div class="autoJb">
+          <label for="autoJbInput" id="autoJbLabel">Auto Jailbreak</label>
+          <input class="mt-2" id="autoJbInput" type="checkbox">
+        </div>
+      </div>
+
+      <pre id="console" class="console-busy">Ready. Awaiting execution...</pre>
+    </main>
+  </div>
+
+  <!-- Correct lowercase path: src/main.js -->
+  <script src="src/main.js"></script>
+  <script src="includes/script.js"></script>
+
+  <script>
+  (function () {
+    var el = document.getElementById("console");
+    if (!el) return;
+    var successRe = /(success|done|complete|jailbreak(ed)?|payload\s*(loaded|sent)|hen\s*(loaded|ready)|goldhen|finished)/i;
+    var failRe = /(fail|error|crash|abort|unsupported)/i;
+    function paint() {
+      var t = (el.textContent || "").toLowerCase();
+      el.classList.remove("console-busy", "console-ok", "console-fail");
+      if (failRe.test(t) && !successRe.test(t)) {
+        el.classList.add("console-fail");
+      } else if (successRe.test(t)) {
+        el.classList.add("console-ok");
+      } else {
+        el.classList.add("console-busy");
+      }
+    }
+    var mo = new MutationObserver(paint);
+    mo.observe(el, { childList: true, characterData: true, subtree: true });
+    paint();
+  })();
+  </script>
+</body>
+</html>
