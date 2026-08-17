@@ -16,6 +16,7 @@ includes/bg (1).jpg
 includes/script.js
 includes/style.css
 includes/jmc5.gif
+includes/jmc.gif
 src/payload.bin
 src/lapse.js
 src/loader.js
